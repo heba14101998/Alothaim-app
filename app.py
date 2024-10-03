@@ -26,15 +26,6 @@ def setup():
     file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
 
-    try:
-        # Update the package list
-        subprocess.run(["sudo", "apt-get", "update"])
-        subprocess.run(["sudo", "apt-get", "install", "xclip"])
-        subprocess.run(["sudo", "apt-get", "install", "xselect"])
-        logger.info("xclip installed successfully!")
-    except subprocess.CalledProcessError as e:
-        logger.info(f"Error updating linux package: {e}")
-
     # Set up the Streamlit page layout and title
     st.set_page_config(
         page_title="Abdullah AlOthaim Markets Egypt",

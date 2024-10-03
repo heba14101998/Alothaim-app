@@ -1,4 +1,5 @@
 import os
+import subprocess
 import base64
 import logging
 import clipboard
@@ -14,6 +15,7 @@ from data_processing import process_data, check_missing_branches
 
 def setup():
     """Sets up logging and Streamlit page configuration."""
+
     # Ensure log folder exists
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.INFO)
@@ -23,6 +25,15 @@ def setup():
     file_handler = logging.FileHandler("logs.log")  # Create the file handler
     file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
+
+    try:
+        # Update the package list
+        subprocess.run(["sudo", "apt-get", "update"])
+        subprocess.run(["sudo", "apt-get", "install", "xclip"])
+        subprocess.run(["sudo", "apt-get", "install", "xselect"])
+        logger.info("xclip installed successfully!")
+    except subprocess.CalledProcessError as e:
+        logger.info(f"Error updating linux package: {e}")
 
     # Set up the Streamlit page layout and title
     st.set_page_config(
@@ -74,7 +85,7 @@ def display_results(all_branches_df, missed_branches_df):
 
             # Highlight rows with time difference greater than 30 minutes
             styled_results_df = all_branches_df.style.apply(
-                lambda x: [ "background-color: rgba(231, 103, 103, 0.547)"  if x["flag"] == 1 else "" 
+                lambda x: [ "background-color: rgba(255, 255, 0, 0.2)"  if x["flag"] == 1 else "" 
                             for _ in range(len(x)) ], axis=1,
             )
 
@@ -92,11 +103,12 @@ def display_results(all_branches_df, missed_branches_df):
             st.write(" ")
             st.write(" ")
             st.subheader("Missed Branches", divider="red")
+            st.caption(f"{current_time}")
             st.markdown(
                 f"<div class='missed-branches-box'>{len(missed_branches_df)}</div>",
                 unsafe_allow_html=True,
             )
-            st.caption(" ")
+            
             # Display "Missed Branches" table if there are any missed branches
             if len(missed_branches_df) > 0:
                 st.dataframe(missed_branches_df, use_container_width=False, hide_index=True)

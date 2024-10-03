@@ -89,7 +89,7 @@ def check_missing_branches(results_df):
     """Analyzes branch status and returns a DataFrame with all branches."""
 
     results_df['Time Difference'] = pd.to_timedelta(results_df['Time Difference'])
-    results_df["flag"] = results_df["Time Difference"].apply(lambda time_diff: 1 if time_diff > timedelta(minutes=30) else 0) 
+    results_df["flag"] = results_df["Time Difference"].apply(lambda time_diff: 1 if time_diff > timedelta(minutes=60) else 0) 
     logger.info(f"Created flag")
     
     missed_df1 = results_df[results_df["flag"] ==1]

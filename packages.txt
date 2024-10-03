@@ -1,4 +1,2 @@
-sudo apt update
-sudo apt install apt 
-sudo apt-get install xclip
-sudo apt-get install xselect
+xclip
+xselect

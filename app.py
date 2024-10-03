@@ -84,10 +84,10 @@ def display_results(all_branches_df, missed_branches_df):
             st.dataframe(styled_results_df, use_container_width=False, hide_index=True)
 
             # Streamlit button to copy DataFrame content to clipboard
-            if st.button("Copy", key="copy_button", use_container_width=False):
+            # if st.button("Copy", key="copy_button", use_container_width=False):
                 
-                clipboard.copy(all_branches_df.drop("flag", axis=1).to_csv(sep="\t", index=False))
-                st.success("Data copied to clipboard! ")
+            #     clipboard.copy(all_branches_df.drop("flag", axis=1).to_csv(sep="\t", index=False))
+            #     st.success("Data copied to clipboard! ")
 
         with right_col:
             # Display Missed Branches

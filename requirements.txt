@@ -2,3 +2,4 @@ pandas>=1.5.0
 streamlit>=1.18.0
 openpyxl
 pyperclip==1.9.0
+tabulate==0.9.0

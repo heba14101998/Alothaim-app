@@ -4,18 +4,6 @@ import json
 import logging
 import os
 
-# GLOBAL 
-EXCLUDED_BRANCHES = [
-    50009,
-    50011,
-    50016,
-    50018,
-    50036,
-    50037,
-    50038,
-    50046,
-]
-
 # Set up logger 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -116,7 +104,7 @@ def check_missing_branches(results_df):
     for branch_id in formatted_list:  
 
         # Convert to list before creating the set
-        if branch_id not in set(results_df["Branch ID"]) and branch_id not in EXCLUDED_BRANCHES:
+        if branch_id not in set(results_df["Branch ID"]):
             missed_branches.append(branch_id)
 
     logger.info("Apply condition2 (Branch in the file)")

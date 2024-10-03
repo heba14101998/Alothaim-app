@@ -4,12 +4,12 @@ import logging
 import pyperclip
 import pandas as pd
 import streamlit as st
-from datetime import timedelta
+from datetime import timedelta, datetime
 from tabulate import tabulate  # Import tabulate
 
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
+# import smtplib
+# from email.mime.text import MIMEText
+# from email.mime.multipart import MIMEMultipart
 
 from data_processing import process_data, check_missing_branches
 
@@ -63,9 +63,12 @@ def display_results(all_branches_df, missed_branches_df):
             # Display Uploaded Branches
             st.write(" ")
             st.write(" ")
-            st.subheader("Uploaded Branches", divider="green")
+
+            current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            st.subheader(f"Uploaded Branches", divider="green")  
+            st.caption(f"{current_time}")
             st.markdown(
-                f"<div class='uploaded-branches-box'>{len(all_branches_df)}</div>",
+                f"<div class='uploaded-branches-box'>{len(all_branches_df[all_branches_df['flag']==0])}</div>",
                 unsafe_allow_html=True,
             )
 
@@ -90,7 +93,7 @@ def display_results(all_branches_df, missed_branches_df):
             st.write(" ")
             st.write(" ")
             st.subheader("Missed Branches", divider="red")
-
+            st.caption(" ")
             st.markdown(
                 f"<div class='missed-branches-box'>{len(missed_branches_df)}</div>",
                 unsafe_allow_html=True,
@@ -122,39 +125,39 @@ def display_results(all_branches_df, missed_branches_df):
 
 
 # def send_email(all_branches_df, missed_branches_df):
-    """Sends an email with analysis results using SMTP."""
+    # """Sends an email with analysis results using SMTP."""
 
-    # Email configuration
-    SERVER = "smtp.othaimmarkets.com.eg"  # Replace with your SMTP server
-    FROM = "heba.mohamed@othaimmarkets.com.eg"  # Replace with your email address
-    TO = ["itops@othaimmarkets.com.eg"]  # Replace with recipient email(s)
+    # # Email configuration
+    # SERVER = "smtp.othaimmarkets.com.eg"  # Replace with your SMTP server
+    # FROM = "heba.mohamed@othaimmarkets.com.eg"  # Replace with your email address
+    # TO = ["itops@othaimmarkets.com.eg"]  # Replace with recipient email(s)
 
-    SUBJECT = "Branch Status Report"
-    TEXT = f"""
-    ## Uploaded Branches:
+    # SUBJECT = "Branch Status Report"
+    # TEXT = f"""
+    # ## Uploaded Branches:
 
-    {tabulate(all_branches_df.drop("flag", axis=1), tablefmt="plain", headers="keys", showindex=False)}
+    # {tabulate(all_branches_df.drop("flag", axis=1), tablefmt="plain", headers="keys", showindex=False)}
 
-    ## Missed Branches:
+    # ## Missed Branches:
 
-    {tabulate(missed_branches_df, tablefmt="plain", headers="keys", showindex=False)}
-    """
+    # {tabulate(missed_branches_df, tablefmt="plain", headers="keys", showindex=False)}
+    # """
 
-    # Create message object
-    msg = MIMEMultipart()
-    msg["From"] = FROM
-    msg["To"] = ", ".join(TO)
-    msg["Subject"] = SUBJECT
-    msg.attach(MIMEText(TEXT, 'plain'))
+    # # Create message object
+    # msg = MIMEMultipart()
+    # msg["From"] = FROM
+    # msg["To"] = ", ".join(TO)
+    # msg["Subject"] = SUBJECT
+    # msg.attach(MIMEText(TEXT, 'plain'))
 
-    # Send the email
-    with smtplib.SMTP_SSL(SERVER, 465) as server:  # Use SMTP_SSL for secure connections
-        server.login(FROM, "H@M2024*")  # Replace with your email password
-        server.sendmail(FROM, TO, msg.as_string())
-        server.quit()
+    # # Send the email
+    # with smtplib.SMTP_SSL(SERVER, 465) as server:  # Use SMTP_SSL for secure connections
+    #     server.login(FROM, "H@M2024*")  # Replace with your email password
+    #     server.sendmail(FROM, TO, msg.as_string())
+    #     server.quit()
 
-    st.success("Email sent successfully!")
-    logging.info("Email sent successfully.")
+    # st.success("Email sent successfully!")
+    # logging.info("Email sent successfully.")
 
 def main():
     """Main function to run the Streamlit app."""

@@ -58,11 +58,15 @@ def process_data(uploaded_file):
         raise
 
     try:
-        now = datetime.now()
+        import pytz
+
+        # Get the timezone for Cairo, Egypt
+        cairo_tz = pytz.timezone('Africa/Cairo')
+        
+        now = datetime.now(cairo_tz) #+ timedelta(hours=3)
+        df_filtered["Date uploaded"] = df_filtered["Date uploaded"].apply(lambda dt: dt.replace(tzinfo=cairo_tz))
         time_diff = now - df_filtered["Date uploaded"]
-        df_filtered["Time diff"] = (
-            time_diff.astype(str).str.extract(r"(\d+:\d+:\d+)")[0]
-        )
+        df_filtered["Time diff"] = (time_diff.astype(str).str.extract(r"(\d+:\d+:\d+)")[0])
         logger.info("Time difference calculated.")
     except Exception as e:
         logger.error(f"Error calculating time difference: {e}")

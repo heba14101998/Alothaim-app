@@ -1,8 +1,8 @@
 import os
-import subprocess
 import base64
+import pytz
 import logging
-import clipboard
+# import clipboard
 import pandas as pd
 import streamlit as st
 from datetime import timedelta, datetime
@@ -65,7 +65,10 @@ def display_results(all_branches_df, missed_branches_df):
             st.write(" ")
             st.write(" ")
 
-            current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            # Get the timezone for Cairo, Egypt
+            cairo_tz = pytz.timezone('Africa/Cairo')
+
+            current_time = datetime.now(cairo_tz).strftime("%Y-%m-%d %H:%M  %p")
             st.subheader(f"Uploaded Branches", divider="green")  
             st.caption(f"{current_time}")
             st.markdown(

@@ -304,3 +304,30 @@
 2024-10-03 08:24:07,588 - ERROR - data_processing.py - 28 - Invalid JSON format in branch_data.json
 2024-10-03 08:24:07,589 - INFO - data_processing.py - 101 - Branch data loaded and filtered.
 2024-10-03 08:24:07,589 - INFO - data_processing.py - 110 - Apply condition2 (Branch in the file)
+2024-10-03 08:30:17,350 - INFO - data_processing.py - 44 - Excel file successfully loaded.
+2024-10-03 08:30:17,365 - INFO - data_processing.py - 54 - Data filtered and grouped.
+2024-10-03 08:30:17,369 - INFO - data_processing.py - 66 - Time difference calculated.
+2024-10-03 08:30:17,374 - INFO - data_processing.py - 79 - Branch ID extracted and DataFrame prepared.
+2024-10-03 08:30:17,378 - INFO - data_processing.py - 93 - Created flag
+2024-10-03 08:30:17,379 - INFO - data_processing.py - 96 - Apply condition1 (not outdates)
+2024-10-03 08:30:17,381 - INFO - data_processing.py - 22 - Branch data loaded from branch_data.json
+2024-10-03 08:30:17,381 - INFO - data_processing.py - 101 - Branch data loaded and filtered.
+2024-10-03 08:30:17,382 - INFO - data_processing.py - 110 - Apply condition2 (Branch in the file)
+2024-10-03 08:31:02,708 - INFO - data_processing.py - 44 - Excel file successfully loaded.
+2024-10-03 08:31:02,708 - INFO - data_processing.py - 44 - Excel file successfully loaded.
+2024-10-03 08:31:02,885 - INFO - data_processing.py - 54 - Data filtered and grouped.
+2024-10-03 08:31:02,885 - INFO - data_processing.py - 54 - Data filtered and grouped.
+2024-10-03 08:31:02,941 - INFO - data_processing.py - 66 - Time difference calculated.
+2024-10-03 08:31:02,941 - INFO - data_processing.py - 66 - Time difference calculated.
+2024-10-03 08:31:02,952 - INFO - data_processing.py - 79 - Branch ID extracted and DataFrame prepared.
+2024-10-03 08:31:02,952 - INFO - data_processing.py - 79 - Branch ID extracted and DataFrame prepared.
+2024-10-03 08:31:02,967 - INFO - data_processing.py - 93 - Created flag
+2024-10-03 08:31:02,967 - INFO - data_processing.py - 93 - Created flag
+2024-10-03 08:31:02,970 - INFO - data_processing.py - 96 - Apply condition1 (not outdates)
+2024-10-03 08:31:02,970 - INFO - data_processing.py - 96 - Apply condition1 (not outdates)
+2024-10-03 08:31:02,979 - INFO - data_processing.py - 22 - Branch data loaded from branch_data.json
+2024-10-03 08:31:02,979 - INFO - data_processing.py - 22 - Branch data loaded from branch_data.json
+2024-10-03 08:31:02,981 - INFO - data_processing.py - 101 - Branch data loaded and filtered.
+2024-10-03 08:31:02,981 - INFO - data_processing.py - 101 - Branch data loaded and filtered.
+2024-10-03 08:31:02,983 - INFO - data_processing.py - 110 - Apply condition2 (Branch in the file)
+2024-10-03 08:31:02,983 - INFO - data_processing.py - 110 - Apply condition2 (Branch in the file)

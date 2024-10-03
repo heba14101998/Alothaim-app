@@ -1,11 +1,10 @@
 import os
 import base64
 import logging
-import pyperclip
+import clipboard
 import pandas as pd
 import streamlit as st
 from datetime import timedelta, datetime
-from tabulate import tabulate  # Import tabulate
 
 # import smtplib
 # from email.mime.text import MIMEText
@@ -85,7 +84,7 @@ def display_results(all_branches_df, missed_branches_df):
             # Streamlit button to copy DataFrame content to clipboard
             if st.button("Copy", key="copy_button", use_container_width=False):
                 
-                pyperclip.copy(all_branches_df.drop("flag", axis=1).to_csv(sep="\t", index=False))
+                clipboard.copy(all_branches_df.drop("flag", axis=1).to_csv(sep="\t", index=False))
                 st.success("Data copied to clipboard! ")
 
         with right_col:
@@ -93,12 +92,11 @@ def display_results(all_branches_df, missed_branches_df):
             st.write(" ")
             st.write(" ")
             st.subheader("Missed Branches", divider="red")
-            st.caption(" ")
             st.markdown(
                 f"<div class='missed-branches-box'>{len(missed_branches_df)}</div>",
                 unsafe_allow_html=True,
             )
-
+            st.caption(" ")
             # Display "Missed Branches" table if there are any missed branches
             if len(missed_branches_df) > 0:
                 st.dataframe(missed_branches_df, use_container_width=False, hide_index=True)
